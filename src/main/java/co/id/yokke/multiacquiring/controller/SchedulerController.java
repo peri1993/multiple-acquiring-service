@@ -25,8 +25,8 @@ public class SchedulerController {
 	@Scheduled(cron = "2 * * * * *")
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void schedulerReplaceQr() throws IOException {
-//		logger.info("call SP ");
-//		servicePten.callStoreProcedure();
+		logger.info("call SP ");
+		servicePten.callStoreProcedure();
 
 		logger.info("update CRC ");
 		servicePten.updateCrc();
@@ -49,7 +49,7 @@ public class SchedulerController {
 	public void uploadSFTP() throws FileNotFoundException {
 		servicePten.uploadSFTP();
 
-		servicePten.uploadAli();
+//		servicePten.uploadAli();
 	}
 
 // Hanya untuk development	

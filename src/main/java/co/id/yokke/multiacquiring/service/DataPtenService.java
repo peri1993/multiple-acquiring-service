@@ -403,9 +403,9 @@ public class DataPtenService extends BaseService {
 					File initialFile = new File(FOLDER_TEMP_QR_NOW() + model.getNmid() + CommonConstanst.DEFAULT_TID_PTEN_NAME + CommonConstanst.EXT_PNG);
 					if(initialFile.exists()) {
 						Boolean flagRequest = false;
-						if(CommonConstanst.Y.equals(model.getReqFlag())) {
-							flagRequest = true;
-						}
+//						if(CommonConstanst.Y.equals(model.getReqFlag())) {
+//							flagRequest = true;
+//						}
 						if(dataSendSFTP(initialFile, flagRequest)) {
 							model.setSendFtp(CommonConstanst.Y);
 							repository.save(model);
