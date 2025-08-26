@@ -13,8 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import co.id.yokke.multiacquiring.common.constant.CommonConstanst;
 import co.id.yokke.multiacquiring.service.DataPtenService;
+import co.id.yokke.multiacquiring.service.DataTempService;
 
-@Component
+//@Component
 public class SchedulerController {
 
 	protected static Logger logger = LoggerFactory.getLogger(SchedulerController.class);
@@ -22,11 +23,14 @@ public class SchedulerController {
 	@Autowired
 	private DataPtenService servicePten;
 
+	@Autowired
+	private DataTempService dataTempService;
+
 	@Scheduled(cron = "2 * * * * *")
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void schedulerReplaceQr() throws IOException {
-		logger.info("call SP ");
-		servicePten.callStoreProcedure();
+//		logger.info("call SP ");
+//		servicePten.callStoreProcedure();
 
 		logger.info("update CRC ");
 		servicePten.updateCrc();
@@ -34,7 +38,22 @@ public class SchedulerController {
 		logger.info("generate QR ");
 		servicePten.generate();
 	}
-
+	
+//	@Scheduled(cron = "0 0/3 * * * ?")
+//	@Transactional(propagation = Propagation.REQUIRES_NEW)
+//	public void callRegenerate() throws IOException {
+//		logger.info("call SP -> For Regenerate MID");
+//		servicePten.callForRegenerate();
+//	}
+//
+//	@Scheduled(cron = "0 0/5 * * * ?")
+//	@Transactional(propagation = Propagation.REQUIRES_NEW)
+//	public void save() throws IOException {
+//
+//		logger.info("save mid to table temporary");
+//		dataTempService.saveTempMID();
+//	}
+	
 	//// 6 am
 	@Scheduled(cron = "0 0 6 * * ?")
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
@@ -49,7 +68,7 @@ public class SchedulerController {
 	public void uploadSFTP() throws FileNotFoundException {
 		servicePten.uploadSFTP();
 
-//		servicePten.uploadAli();
+		servicePten.uploadAli();
 	}
 
 // Hanya untuk development	
@@ -59,10 +78,22 @@ public class SchedulerController {
 //		logger.info("call SP Update flag SFTP");
 //		servicePten.callStoreProcedureUpdateFlagSFTP();
 //	}
-	
+
 //	===============================================================Data Job DEVELOPMENT & PRODUCTION ===========================================================================
 
-	
+	// create file excel
+//	@Scheduled(cron = "0 2 1 * * ?")
+//	@Transactional(propagation = Propagation.REQUIRES_NEW)
+//	public void schedulerSaveForRegenerateMID() throws IOException {
+//
+//		logger.info("Create File .xlsx");
+//		dataTempService.createTemplate();
+//
+//		logger.info("Remove all data MID Re - generate Temp");
+//		dataTempService.deleteAllTempMid();
+//
+//	}
+//
 //	//// 12 am
 //	@Scheduled(cron = "0 0 0 * * ?")
 //	@Transactional(propagation = Propagation.REQUIRES_NEW)

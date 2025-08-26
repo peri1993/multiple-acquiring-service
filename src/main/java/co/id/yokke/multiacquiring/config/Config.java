@@ -1,3 +1,4 @@
+
 package co.id.yokke.multiacquiring.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -25,6 +26,25 @@ public class Config {
 
 	private String spUpdateSftp;
 	private String SFTPrequestDir;
+
+	private String regenerate;
+	private String callRegenerate;
+
+	public String getCallRegenerate() {
+		return callRegenerate;
+	}
+
+	public void setCallRegenerate(String callRegenerate) {
+		this.callRegenerate = callRegenerate;
+	}
+
+	public String getRegenerate() {
+		return regenerate;
+	}
+
+	public void setRegenerate(String regenerate) {
+		this.regenerate = regenerate;
+	}
 
 	public String getSFTPrequestDir() {
 		return SFTPrequestDir;

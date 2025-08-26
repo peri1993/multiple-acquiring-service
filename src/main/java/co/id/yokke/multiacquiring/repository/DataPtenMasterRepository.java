@@ -18,4 +18,13 @@ public interface DataPtenMasterRepository extends JpaRepository<DataMasterModel,
 			+ "AND pten.tidPten != 'A01' "
 			+ "ORDER BY pten.mid ASC ")
 	List<String> listZipDataMaster(Timestamp start, Timestamp end);
+	
+	@Query("select a from DataMasterModel a "
+			+ "where a.mid = ?1 "
+			+ "and a.nmid = ?2")
+	List<DataMasterModel> listFindByMidAndNmid(String mid, String nmid);
+	
+	@Query("select a from DataMasterModel a "
+			+ "where a.mid = ?1 ")
+	List<DataMasterModel> listFindByMid(String mid);
 }

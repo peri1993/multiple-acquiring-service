@@ -22,7 +22,7 @@ public class SecurityCredentialsConfig {
 //                exception.authenticationEntryPoint((req, rsp, e) -> claim.handling(req, rsp)) // Handle unauthorized attempts
 //            )
 				.authorizeHttpRequests(auth -> auth.requestMatchers("/generate", "/call-sp", "/create-crc", "/data-csv",
-						"/upload-csv", "/upload-csv-now", "/diffrent").permitAll().anyRequest().authenticated())
+						"/upload-csv", "/upload-csv-now", "/diffrent", "/cek", "/save-generate", "/create-generate-temp").permitAll().anyRequest().authenticated())
 				.addFilterAfter(jwtTokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
 		return http.build();

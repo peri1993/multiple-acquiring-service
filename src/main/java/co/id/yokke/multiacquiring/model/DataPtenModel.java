@@ -12,7 +12,7 @@ import lombok.Data;
 
 @Entity
 //@Table(name = "DATA_PTEN_5")
-@Table(name = "DATA_PTEN_PROD_10")
+@Table(name = "DATA_PTEN_PROD")
 @Data
 public class DataPtenModel {
 

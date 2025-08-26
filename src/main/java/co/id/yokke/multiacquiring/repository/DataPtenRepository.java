@@ -15,10 +15,10 @@ import co.id.yokke.multiacquiring.model.DataPtenModel;
 public interface DataPtenRepository extends JpaRepository<DataPtenModel, String>{
 	
 	// ENV PROD
-	@Query(value = "SELECT *  FROM DATA_PTEN_PROD_10 WHERE STATUS_PROSES = '1' ORDER BY OOB_ID FETCH FIRST 10 ROWS ONLY ", nativeQuery = true)
+	@Query(value = "SELECT *  FROM DATA_PTEN_PROD WHERE STATUS_PROSES = '1' ORDER BY OOB_ID FETCH FIRST 10 ROWS ONLY ", nativeQuery = true)
 	List<DataPtenModel> listDataStatusProsesOne();
 	
-	@Query(value = "SELECT *  FROM DATA_PTEN_PROD_10 WHERE STATUS_PROSES = '0' AND QR_STRING IS NOT NULL ORDER BY OOB_ID FETCH FIRST 50 ROWS ONLY ", nativeQuery = true)
+	@Query(value = "SELECT *  FROM DATA_PTEN_PROD WHERE STATUS_PROSES = '0' AND QR_STRING IS NOT NULL ORDER BY OOB_ID FETCH FIRST 50 ROWS ONLY ", nativeQuery = true)
 	List<DataPtenModel> listDataForCRC();
 	
 //	// ENV DEV

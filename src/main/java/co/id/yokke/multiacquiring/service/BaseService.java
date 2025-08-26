@@ -55,6 +55,8 @@ import co.id.yokke.multiacquiring.model.DataPtenModel;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.servlet.http.HttpServletRequest;
+import net.schmizz.sshj.SSHClient;
+import net.schmizz.sshj.transport.verification.PromiscuousVerifier;
 
 @Service
 @Transactional
@@ -99,6 +101,23 @@ public class BaseService {
 	
 	public String FOLDER_TEMP_QR_NOW() {
 		return System.getProperty("user.dir") + FOLDER_NOW();
+	}
+	
+	public SSHClient setupJsch() {
+		String remoteHost = config.getSFTPremoteHost();
+		String username = config.getSFTPusername();
+		String password = config.getSFTPpassword();
+
+		SSHClient client = new SSHClient();
+		client.addHostKeyVerifier(new PromiscuousVerifier());
+		try {
+			client.connect(remoteHost);
+			client.authPassword(username, password);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return client;
 	}
 	
 	public int positionXmerchantNameMandiri(BufferedImage img, String merchantName) {
@@ -242,6 +261,15 @@ public class BaseService {
 		folder = String.valueOf(dateFormat.format(date));
 
 		return "/" + folder + "/QR/";
+	}
+	
+	public String FOLDER_REGENERATE() {
+		String folder = CommonConstanst.EMPTY_STRING;
+		DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+		Date date = new Date();
+		folder = String.valueOf(dateFormat.format(date));
+		
+		return folder + "/";
 	}
 	
 	public String FOLDER_YESTERDAY() {

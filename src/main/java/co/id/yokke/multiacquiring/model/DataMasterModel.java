@@ -11,8 +11,8 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "DATA_PTEN_PROD_MASTER_DEV")
-//@Table(name = "DATA_PTEN_PROD_MASTER")
+//@Table(name = "DATA_PTEN_PROD_MASTER_DEV")
+@Table(name = "DATA_PTEN_PROD_MASTER")
 @Data
 public class DataMasterModel {
 
